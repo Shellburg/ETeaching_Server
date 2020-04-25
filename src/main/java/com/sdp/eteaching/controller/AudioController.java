@@ -83,11 +83,12 @@ public class AudioController {
                     // String filePath = request.getSession().getServletContext().getRealPath("/") + "upload/test/" + listFile.get(i).getOriginalFilename();
 // 转存文件
                     try {
-                        saveFile(listFile.get(i), "E:/Eteaching/audio/");
+                        //saveFile(listFile.get(i), "E:/Eteaching/audio/");
+                        saveFile(listFile.get(i), "/eteaching/audio/");
                         //listFile.get(i).transferTo(new File(filePath));
 
                         String fileName = listFile.get(i).getOriginalFilename();
-                        String path = "E:/Eteaching/audio/" + fileName;
+                        String path = "/eteaching/audio/" + fileName;
                         studentService.uploadAudioHomework(path, studentID, classID);
 
                     } catch (IllegalStateException e) {
@@ -133,9 +134,9 @@ public class AudioController {
         // 设置contenttype，即告诉客户端所发送的数据属于什么类型
         response.setHeader("Content-type", type);
         // 设置编码
-        String hehe = new String(filename.getBytes("utf-8"), "iso-8859-1");
+        String fileByte = new String(filename.getBytes("utf-8"), "iso-8859-1");
         // 设置扩展头，当Content-Type 的类型为要下载的类型时 , 这个信息头会告诉浏览器这个文件的名字和类型。
-        response.setHeader("Content-Disposition", "attachment;filename=" + hehe);
+        response.setHeader("Content-Disposition", "attachment;filename=" + fileByte);
         FileUtil.download(filename, response);
     }
 
